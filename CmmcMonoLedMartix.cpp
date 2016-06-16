@@ -21,7 +21,7 @@ CmmcMonoLedMartix::CmmcMonoLedMartix(){
 void CmmcMonoLedMartix::begin(int addr){
   addI2c = addr;
   Wire.begin();// wake up I2C bus
-  Wire.setClock(400000);
+  Wire.setClock(1700000);
   Wire.beginTransmission(addI2c); // Connect to chip
   Wire.write((byte)0x01);       // Select Bank B
   Wire.write((byte)0x00);       // Set all of bank B to outputs
@@ -50,7 +50,7 @@ void CmmcMonoLedMartix::showPic8bit(int dataPic[8]){
          Wire.write(0x13);              // Set Memory Pointer to Bank B
          Wire.write(byte(dataPic[countArray]));                 // Write the Byte
          Wire.endTransmission();        // Close connection
-		 delay(2);
+		 delayMicroseconds(500);
 		 //
 		 //close roW and coL prevent bug
 		 Wire.beginTransmission(addI2c);  // Connect to chip
